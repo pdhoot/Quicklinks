@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Home | QuickLinks {{title}}</title>
+		<script src="https://cdn.sdslabs.co.in/cdnjs/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$.ajax({
+						url:"/posts",
+						type:"POST",
+						data:{
+							post:$("#postU").val(),
+							filename:"month"
+						},
+						dataType:'json',
+						success:function(r){
+							var c="";
+							
+							for(var i = 0 ; i<r.length ; i++)
+							{
+								c+='<div>';
+								c+='<p >' + r[i]['username'] + '</p>';
+								c+='<a href="/increment?link=' + r[i]['post']+'&id_no='+r[i]['id']+'" target="_blank">'+ r[i]['post'] +'</a>';
+								c+='<hr width="1000" />';
+								c+='</div>';
+							}
+							$("#posts").html(c);
+						}
+					});
+				$("button").click(function(){
+					$.ajax({
+						url:"/posts",
+						type:"POST",
+						data:{
+							post:$("#postU").val(),
+							filename:"month"
+						},
+						dataType:'json',
+						success:function(r){
+							var c="";
+							
+							for(var i = 0 ; i<r.length ; i++)
+							{
+								c+='<div>';
+								c+='<p >' + r[i]['username'] + '</p>';
+								c+='<a href="increment.php?link=' + r[i]['post']+'" target="_blank">'+ r[i]['post'] +'</a>';
+								c+='<hr width="1000" />';
+								c+='</div>';
+							}
+							$("#posts").html(c);
+							
+
+						},
+
+						error:function(xhr , thrownError , r){
+							console.log(xhr.status);
+							console.log(thrownError);
+							console.log("error");
+							console.log(r);
+						}
+
+					});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="logout_box">
+			<a href="/logout">LogOut</a>
+		</div>
+		<div id="checkLinks">
+			<a href = "/posts?filename=top">Top</a>
+			<a href = "/posts?filename=five">FiveDays</a>
+			<a href = "/posts?filename=today">Today</a>
+			<a href = "/posts?filename=month">Month</a>
+		</div>	
+		<div id="posts"></div>
+			<input type="text" name="post" id="postU">
+			<button id="button">Post</button>
+	</body>
+	<p>{{errorMsg}}</p>
+	<p>{{user}}</p>
+	
+</html>			

@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Login | QuickLinks</title>
+	</head>
+	
+	<body>
+		<form action="/login" method="POST">
+			<input type="text" name="username" placeholder="username">
+			<input type="password" name = "password" placeholder="password">
+			<input type="checkbox" name="remember" value="1">Remember Me
+			<input type="submit" value="Log In">
+		</form>
+		<p>{{tp}}</p>
+		<p>{{errorMsg}}</p>
+	</body>
+</html>			

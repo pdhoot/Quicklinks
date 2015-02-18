@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<!-- Remember to load the jquery source library here -->
+<html>
+	<head>
+		<title>SignUp | QuickLinks</title>
+		 <script src="jquerSource"></script>
+		 <script>
+			$(document).ready(function(){
+				$("#cnfpassword").focus(function(){
+					$("#cnfpassword").keypress(function(){
+						$.ajax({
+							url:"/passwordconf",
+							type:"POST",
+							data:{
+								password:$("#password").val(),
+								cnfpassword:$("cnfpassword").val()
+							}
+							dataType:"json",
+							success:function(r){
+								$("#error").text("{{errorMessage}}");
+							}
+						});
+					});
+				});
+			});
+		 </script>
+	</head>
+	<body>
+		<div id="login_box">
+			<a href="/">Login Page</a>
+		</div>	
+		<form action="/signup" method="post">
+			<table id="signupForm">
+				<tr>
+					<td>Name</td>
+					<td><input type="text" name="name"></td>
+				</tr>
+				<tr>
+					<!--As a better method you can use ajax here to check the availabilty of a username-->
+					<td>Username</td>
+					<td><input type="text" name="username"></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input type="password" name="password"></td>
+				</tr>
+				<tr>
+					<td>Confirm Password</td>
+					<td><input type="password" name="cnfpassword"></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><input type="email" name="email"></td>
+				</tr>
+			</table>
+
+			<input type="submit" value="Sign Up">
+		</form>
+		<p id="error">{{error}}</p>
+		<!-- As an alternative you can add signin with facebook or google+ options -->	
+	</body>
+</html>				 		

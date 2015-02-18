@@ -1,0 +1,5 @@
+To adds and Check
+1.) Remember me feauture
+2.) Upvote feature
+3.) profile photo adder
+4.) Credentials file 

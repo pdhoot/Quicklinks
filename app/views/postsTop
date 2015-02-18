@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Home | QuickLinks</title>
+		<script src="jquersrc"></script>
+		<script>
+			$(document).ready(function(){
+				$.ajax({
+						url:"/posts",
+						type:"POST",
+						data:{
+							post:$("#postU").val(),
+							filename:"top"
+						},
+						succes:function(r){
+							var c="";
+							for(var i = 0 ; i<r.length ; i++)
+							{
+								// Add div tags here
+								c+='<p >' + {{user}} + ' <span id="time">' + {{timestamp}}+'<span> </p>';
+								c+='<a href="increment.php?link=' + {{posts}}+'" target="_blank">'+ {{posts}} +'</a>';
+								c+='<hr width="1000" />';
+							}
+							$("#posts").html(c);
+						}
+					});
+				$("button").click(function(){
+					$.ajax({
+						url:"/posts",
+						type:"POST",
+						data:{
+							post:$("#postU").val(),
+							filename:"fivedays"
+						},
+						succes:function(r){
+							var c="";
+							for(var i = 0 ; i<r.length ; i++)
+							{
+								// Add div tags here
+								c+='<p >' + {{user}} + ' <span id="time">' + {{timestamp}}+'<span> </p>';
+								c+='<a href="increment.php?link=' + {{posts}}+'" target="_blank">'+ {{posts}} +'</a>';
+								c+='<hr width="1000" />';
+							}
+							$("#posts").html(c);
+						}
+					});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="posts"></div>
+		<form >
+			<input type="text" name="post" id="postU">
+			<button id="button">Post</button>
+		</form>
+	</body>
+</html>			
